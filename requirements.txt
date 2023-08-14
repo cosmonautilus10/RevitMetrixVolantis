@@ -1,0 +1,9 @@
+streamlit
+pandas
+os
+warnings
+openpyxl
+io
+matplotlib
+matplotlib.use('agg')
+matplotlib.pyplot as plt
