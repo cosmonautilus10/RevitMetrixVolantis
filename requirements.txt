@@ -1,7 +1,5 @@
 streamlit
 pandas
-warnings
 openpyxl
-io
 matplotlib
 matplotlib.pyplot
