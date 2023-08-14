@@ -5,5 +5,4 @@ warnings
 openpyxl
 io
 matplotlib
-matplotlib.use('agg')
-matplotlib.pyplot as plt
+matplotlib.pyplot
