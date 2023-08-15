@@ -18,7 +18,6 @@ uploaded_file = st.file_uploader("Kies een bestand", type=["xlsx"])
 # Process the uploaded file
 if uploaded_file is not None:
     df = pd.read_excel(uploaded_file)
-    print(df.columns)
     st.write("Origineel Bestand:")
     # Display nlsfb dmv assembly code en assembly description  
     df.insert(1, 'nlsfb', df['Assembly Code'] + ' ' + df['Assembly Description'])
