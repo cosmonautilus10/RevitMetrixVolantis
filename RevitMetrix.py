@@ -45,34 +45,34 @@ if uploaded_file is not None:
     # Group by 'Material: Name' and calculate the sum of 'Material: Volume' and 'Material: Area'
     grouped_df_familyandtype = df.groupby(['Family and Type', 'Material: Unit weight [kg/m³]'])[['Family and Type', 'Count', 'Material: Volume', 'Material: Area', 'Material: Weight']].sum()
     grouped_df_familyandtype = grouped_df_familyandtype.sort_values(by='Material: Weight', ascending=False)
-    grouped_df_familyandtype = grouped_df_familyandtype.reset_index(drop=True)
+    # grouped_df_familyandtype = grouped_df_familyandtype.reset_index(drop=True)
     st.write("Family and Type")
     # print(grouped_df_familyandtype.columns)
-    st.dataframe(grouped_df_familyandtype, hide_index=True)
+    st.dataframe(grouped_df_familyandtype)
 
     # Group by 'Material: Name' and calculate the sum of 'Material: Volume' and 'Material: Area'
     grouped_df_materialname = df.groupby(['Material: Name', 'Material: Unit weight [kg/m³]'])[['Material: Name', 'Count','Material: Volume', 'Material: Area', 'Material: Weight']].sum()
     grouped_df_materialname = grouped_df_materialname.sort_values(by='Material: Weight', ascending=False)
-    grouped_df_materialname = grouped_df_materialname.reset_index(drop=True)
+    # grouped_df_materialname = grouped_df_materialname.reset_index(drop=True)
     st.write("Material: Name")
     # print(grouped_df_materialname.columns)
-    st.dataframe(grouped_df_materialname, hide_index=True)
+    st.dataframe(grouped_df_materialname)
     
     # Group by 'Description' and calculate the sum of 'Material: Volume' and 'Material: Area'
     grouped_df_description = df.groupby(['Description', 'Material: Unit weight [kg/m³]'])[['Description', 'Count','Material: Volume', 'Material: Area', 'Material: Weight']].sum()
     grouped_df_description = grouped_df_description.sort_values(by='Material: Weight', ascending=False)
-    grouped_df_description = grouped_df_description.reset_index(drop=True)
+    # grouped_df_description = grouped_df_description.reset_index(drop=True)
     st.write('Descripton:')
     # print(grouped_df_description.columns)
-    st.dataframe(grouped_df_description, hide_index=True)
+    st.dataframe(grouped_df_description)
 
     # Group by 'nlsfb' and calculate the sum of 'Material: Volume' and 'Material: Area'
-    grouped_df_nlsfb = df.groupby(['NLSfB', 'Material: Unit weight [kg/m³]'])[['NLSfB', 'Count','Material: Volume', 'Material: Area', 'Material: Weight']].sum()
+    grouped_df_nlsfb = df.groupby('NLSfB')[['NLSfB', 'Count','Material: Volume', 'Material: Area', 'Material: Weight']].sum()
     grouped_df_nlsfb = grouped_df_nlsfb.sort_values(by='Material: Weight', ascending=False)
-    grouped_df_nlsfb = grouped_df_nlsfb.reset_index(drop=True)
+    # grouped_df_nlsfb = grouped_df_nlsfb.reset_index(drop=True)
     st.write('NLSfB:')
     # print(grouped_df_nlsfb.columns)
-    st.dataframe(grouped_df_nlsfb, hide_index=True)
+    st.dataframe(grouped_df_nlsfb)
 
     # Let the user input the desired Excel file name
     user_entered_name = st.text_input("Kies een naam voor het Excel-bestand:", "Projectnaam.xlsx")
@@ -93,10 +93,10 @@ if uploaded_file is not None:
         # Export the summarized DataFrames to separate sheets in the same Excel file
         with ExcelWriter(excel_file_path) as writer:
             df.to_excel(writer, sheet_name="Origineel", index=False)
-            grouped_df_materialname.to_excel(writer, sheet_name='Material Name', index=False)
-            grouped_df_familyandtype.to_excel(writer, sheet_name='Family and Type', index=False)
-            grouped_df_description.to_excel(writer, sheet_name="Description", index=False)
-            grouped_df_nlsfb.to_excel(writer, sheet_name="NLSfB", index=False)
+            grouped_df_materialname.to_excel(writer, sheet_name='Material Name', index=True)
+            grouped_df_familyandtype.to_excel(writer, sheet_name='Family and Type', index=True)
+            grouped_df_description.to_excel(writer, sheet_name="Description", index=True)
+            grouped_df_nlsfb.to_excel(writer, sheet_name="NLSfB", index=True)
 
             # Create bar charts and embed them in the Excel file
             sheet_materialname = writer.sheets['Material Name']
