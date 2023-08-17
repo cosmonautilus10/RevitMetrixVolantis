@@ -31,7 +31,7 @@ if uploaded_file is not None:
     df.drop(columns=columns_to_drop, inplace=True)
     
     # Convert 'Material: Unit Weight' to kg/m³
-    df['Material: Unit weight [kg/m³]'] = df['Material: Unit weight'].str.replace(' kN/m³', '').str.replace(',', '.').astype(float) * 9.81
+    df['Material: Unit weight [kg/m³]'] = df['Material: Unit weight'].str.replace(' kN/m³', '').str.replace(',', '.').astype(float) * 98.1
 
     # Convert stripped values in 'Material: Area' and 'Material: Volume' columns to float Remove commas and units, and convert to float
     df['Material: Area'] = df['Material: Area'].str.replace('m²', '').str.replace(',', '.').astype(float)
@@ -99,7 +99,7 @@ if uploaded_file is not None:
             grouped_df_nlsfb.to_excel(writer, sheet_name="NLSfB", index=True)
 
             # Create bar charts and embed them in the Excel file
-            sheet_materialname = writer.sheets['Material Name']
+            sheet_materialname = writer.sheets['Material Name'] 
             sheet_familyandtype = writer.sheets['Family and Type']
             sheet_description = writer.sheets['Description']
             sheet_nlsfb = writer.sheets['NLSfB']
